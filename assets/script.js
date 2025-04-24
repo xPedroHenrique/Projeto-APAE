@@ -12,17 +12,13 @@ document.addEventListener("DOMContentLoaded", () => {
         const dados = { nome, valor, tipo };
 
         try {
-            const resposta = await fetch("/.netlify/functions/doacao", {
+            const resposta = await fetch("http://localhost:3000/doacoes", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
                 },
-                body: JSON.stringify({ nome, email, valor })
+                body: JSON.stringify(dados),
             });
-
-            const dados = await resposta.json();
-            alert(dados.message);
-
 
             const resultado = await resposta.json();
 
