@@ -12,13 +12,17 @@ document.addEventListener("DOMContentLoaded", () => {
         const dados = { nome, valor, tipo };
 
         try {
-            const resposta = await fetch("http://localhost:3000/doacoes", {
+            const resposta = await fetch("/.netlify/functions/doacao", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
                 },
-                body: JSON.stringify(dados),
+                body: JSON.stringify({ nome, email, valor })
             });
+
+            const dados = await resposta.json();
+            alert(dados.message);
+
 
             const resultado = await resposta.json();
 
@@ -33,7 +37,7 @@ document.addEventListener("DOMContentLoaded", () => {
         } catch (error) {
             mensagem.textContent = "Erro de conexão com o servidor.";
             mensagem.style.color = "red";
-            console.error(error); 
+            console.error(error);
         }
     });
 });
